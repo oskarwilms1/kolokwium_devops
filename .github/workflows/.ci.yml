@@ -1,6 +1,8 @@
 name: CI
+
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 on:
   push:
     branches: [main]
@@ -20,11 +22,11 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install -r starter/kolokwium/requirements-dev.txt
+          pip install -r starter/requirements-dev.txt
 
       - name: Run lint
         run: |
-          bash starter/kolokwium/scripts/lint.sh
+          bash starter/scripts/lint.sh
 
   test:
     runs-on: ubuntu-latest
@@ -39,11 +41,11 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install -r starter/kolokwium/requirements-dev.txt
+          pip install -r starter/requirements-dev.txt
 
       - name: Run tests
         run: |
-          PYTHONPATH=. python -m pytest app/tests -v
+          PYTHONPATH=starter python -m pytest starter/app/tests -v
 
   build:
     runs-on: ubuntu-latest
@@ -58,8 +60,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install -r starter/kolokwium/requirements.txt
+          pip install -r starter/requirements.txt
 
       - name: Build check
         run: |
-          python -m py_compile starter/kolokwium/app/main.py
+          python -m py_compile starter/app/main.py
